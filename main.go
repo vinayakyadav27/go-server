@@ -19,7 +19,7 @@ func newsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/hello" {
+	if r.URL.Path != "/about" {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 		return
 	}
