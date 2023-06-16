@@ -18,7 +18,7 @@ func newsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Email= %s\n", address)
 }
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/hello" {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 		return
@@ -34,7 +34,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fileServer)
 	http.HandleFunc("/newsletter", newsHandler)
-	http.HandleFunc("/hello", helloHandler)
+	http.HandleFunc("/about", aboutHandler)
 	fmt.Print("Starting server at port 8080 \n")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
