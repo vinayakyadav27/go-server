@@ -11,7 +11,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "ParseForm err: %v", err)
 		return
 	}
-	fmt.Fprintf(w, "Posted successfully")
+	fmt.Fprintf(w, "Posted successfully \n")
 	name := r.FormValue("name")
 	address := r.FormValue("address")
 	fmt.Fprintf(w, "Name= %s\n", name)
@@ -23,7 +23,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "404 Not Found", http.StatusNotFound)
 		return
 	}
-	if r.Method != "Get" {
+	if r.Method != "GET" {
 		http.Error(w, "Method is not supported", http.StatusNotFound)
 		return
 	}
