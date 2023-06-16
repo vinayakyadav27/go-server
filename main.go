@@ -6,16 +6,16 @@ import (
 	"net/http"
 )
 
-func formHandler(w http.ResponseWriter, r *http.Request) {
+func newsHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm err: %v", err)
 		return
 	}
-	fmt.Fprintf(w, "Posted successfully \n")
+	fmt.Fprintf(w, "Added successfully \n")
 	name := r.FormValue("name")
-	address := r.FormValue("address")
+	address := r.FormValue("email")
 	fmt.Fprintf(w, "Name= %s\n", name)
-	fmt.Fprintf(w, "Address= %s\n", address)
+	fmt.Fprintf(w, "Email= %s\n", address)
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
@@ -33,12 +33,10 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fileServer)
-	http.HandleFunc("/form", formHandler)
+	http.HandleFunc("/newsletter", newsHandler)
 	http.HandleFunc("/hello", helloHandler)
-
 	fmt.Print("Starting server at port 8080 \n")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
-
 }
